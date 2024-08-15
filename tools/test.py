@@ -24,7 +24,6 @@ from mmdet.datasets import replace_ImageToTensor
 import time
 import os.path as osp
 
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
@@ -107,7 +106,16 @@ def parse_args():
     return args
 
 
+def set_env_if_not_exists(key, value):
+    if key not in os.environ:
+        os.environ[key] = value
+
 def main():
+
+    set_env_if_not_exists('RANK', '0')
+    set_env_if_not_exists('WORLD_SIZE', '1')
+    set_env_if_not_exists('MASTER_ADDR', '127.0.0.1')
+    set_env_if_not_exists('MASTER_PORT', '-29503')
     args = parse_args()
 
     assert args.out or args.eval or args.format_only or args.show \

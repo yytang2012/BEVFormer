@@ -12,6 +12,12 @@ Train BEVFormer with 8 GPUs
 Eval BEVFormer with 8 GPUs
 ```
 ./tools/dist_test.sh ./projects/configs/bevformer/bevformer_base.py ./path/to/ckpts.pth 8
+
+./tools/dist_test.sh ./projects/configs/bevformer/bevformer_base.py ./checkpoints/bevformer_small_epoch_24.pth 1
+
+# Use python instead of bash for debugging purpose
+export PYTHONPATH=~/PycharmProjects/BEVFormer
+python tools/test.py ./projects/configs/bevformer/bevformer_small.py ./checkpoints/bevformer_small_epoch_24.pth   --launcher pytorch  --eval bbox
 ```
 Note: using 1 GPU to eval can obtain slightly higher performance because continuous video may be truncated with multiple GPUs. By default we report the score evaled with 8 GPUs.
 
