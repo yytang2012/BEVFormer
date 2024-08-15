@@ -2,7 +2,15 @@
 
 Following https://mmdetection3d.readthedocs.io/en/latest/getting_started.html#installation
 
+**aa. Use Cuda 11**
+```shell
+export PATH=/usr/local/cuda-11/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda-11
 
+# Test cuda version
+nvcc -V
+```
 
 **a. Create a conda virtual environment and activate it.**
 ```shell
@@ -19,7 +27,13 @@ pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f ht
 
 **c. Install gcc>=5 in conda env (optional).**
 ```shell
-conda install -c omgarcia gcc-6 # gcc-6.2
+# conda install -c omgarcia gcc-6 # gcc-6.2
+
+# Use gcc-10
+sudo apt install gcc-10 g++-10
+
+# Set gcc-10 as default
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 60 --slave /usr/bin/g++ g++ /usr/bin/g++-10
 ```
 
 **c. Install mmcv-full.**
